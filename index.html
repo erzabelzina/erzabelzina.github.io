@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elza Bērziņa — Multimediju māksla</title>
+<meta name="description" content="Elza Bērziņa ir multimediju māksliniece no Latvijas. Portfolio: darbi, projekti un kontaktinformācija.">
+<meta name="author" content="Elza Bērziņa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elza Bērziņa — Multimediju māksla">
+<meta property="og:description" content="Elza Bērziņa ir multimediju māksliniece no Latvijas. Portfolio: darbi, projekti un kontaktinformācija.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Inter+Tight:wght@300;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#111111;
+    --dot:#000000;                     /* kursora krāsa */
+    --cg:"Cormorant Garamond", Georgia, serif;
+    --sans:"Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    --display:"DM Serif Display", Georgia, serif;
+    --gap:18px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--cg); -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer;}
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+  /* ---------- Valodas ---------- */
+  html[lang="lv"] [lang="en"]{display:none !important;}
+  html[lang="en"] [lang="lv"]{display:none !important;}
+
+  /* ---------- Fiksētie elementi ----------
+     Balts teksts ar "difference": uz balta fona kļūst melns,
+     virs bildes — invertējas. */
+  .ui{
+    position:fixed; z-index:50;
+    color:#fff; mix-blend-mode:difference;
+  }
+
+  /* Izvēlne: Info + Portfolio pa kreisi, LV/EN pa labi */
+  .menu{
+    top:14px; display:flex; gap:16px; align-items:baseline;
+    font-family:var(--sans); font-size:12px; line-height:1; letter-spacing:.02em;
+  }
+  .menu-l{left:18px;}
+  .menu-r{right:18px; gap:12px;}
+  .menu a, .menu button{font-weight:300;}                    /* neaktīvais: Light 300 */
+  .menu a.active, .menu button.active{font-weight:900;}      /* aktīvais: Black 900 */
+  .menu a:hover, .menu button:hover{font-weight:900;}   /* uzbīdot kursoru — ieboldējas */
+  .menu [data-t]{display:inline-grid;}                  /* rezervē Black platumu, lai izvēlne nelēkā */
+  .menu [data-t]::after{content:attr(data-t); font-weight:900; height:0; overflow:hidden; visibility:hidden; pointer-events:none;}
+  .menu-l a{text-transform:uppercase;}
+
+
+  /* Vārds un uzvārds — katrs savā lapas malā, horizontāli */
+  .name{
+    top:50%; transform:translateY(-50%);
+    font-family:var(--sans); font-weight:900;
+    font-size:30px; text-transform:uppercase;
+    line-height:1; letter-spacing:.02em; white-space:nowrap;
+  }
+  .name-l{left:14px;}
+  .name-r{right:14px;}
+
+  /* ---------- Kursors: maza khaki apļa ---------- */
+  .dot{
+    position:fixed; left:0; top:0; z-index:200;
+    width:14px; height:14px; border-radius:50%;
+    background:#fff; pointer-events:none;
+    mix-blend-mode:difference;   /* balts + difference = melns uz balta, zem tā viss invertējas */
+    opacity:0;
+    transition:opacity .2s ease, width .18s ease, height .18s ease, background-color .18s ease;
+  }
+  .dot.show{opacity:1;}
+  .dot.big{width:40px; height:40px; clip-path:polygon(99.80% 50.00%,99.54% 51.95%,98.82% 53.84%,97.78% 55.66%,96.60% 57.38%,95.49% 59.05%,94.63% 60.71%,94.10% 62.44%,93.92% 64.27%,93.99% 66.23%,94.16% 68.29%,94.23% 70.39%,94.03% 72.44%,93.43% 74.32%,92.38% 75.97%,90.92% 77.34%,89.17% 78.46%,87.29% 79.40%,85.45% 80.28%,83.79% 81.24%,82.39% 82.39%,81.24% 83.79%,80.28% 85.45%,79.40% 87.29%,78.46% 89.17%,77.34% 90.92%,75.97% 92.38%,74.32% 93.43%,72.44% 94.03%,70.39% 94.23%,68.29% 94.16%,66.23% 93.99%,64.27% 93.92%,62.44% 94.10%,60.71% 94.63%,59.05% 95.49%,57.38% 96.60%,55.66% 97.78%,53.84% 98.82%,51.95% 99.54%,50.00% 99.80%,48.05% 99.54%,46.16% 98.82%,44.34% 97.78%,42.62% 96.60%,40.95% 95.49%,39.29% 94.63%,37.56% 94.10%,35.73% 93.92%,33.77% 93.99%,31.71% 94.16%,29.61% 94.23%,27.56% 94.03%,25.68% 93.43%,24.03% 92.38%,22.66% 90.92%,21.54% 89.17%,20.60% 87.29%,19.72% 85.45%,18.76% 83.79%,17.61% 82.39%,16.21% 81.24%,14.55% 80.28%,12.71% 79.40%,10.83% 78.46%,9.08% 77.34%,7.62% 75.97%,6.57% 74.32%,5.97% 72.44%,5.77% 70.39%,5.84% 68.29%,6.01% 66.23%,6.08% 64.27%,5.90% 62.44%,5.37% 60.71%,4.51% 59.05%,3.40% 57.38%,2.22% 55.66%,1.18% 53.84%,0.46% 51.95%,0.20% 50.00%,0.46% 48.05%,1.18% 46.16%,2.22% 44.34%,3.40% 42.62%,4.51% 40.95%,5.37% 39.29%,5.90% 37.56%,6.08% 35.73%,6.01% 33.77%,5.84% 31.71%,5.77% 29.61%,5.97% 27.56%,6.57% 25.68%,7.62% 24.03%,9.08% 22.66%,10.83% 21.54%,12.71% 20.60%,14.55% 19.72%,16.21% 18.76%,17.61% 17.61%,18.76% 16.21%,19.72% 14.55%,20.60% 12.71%,21.54% 10.83%,22.66% 9.08%,24.03% 7.62%,25.68% 6.57%,27.56% 5.97%,29.61% 5.77%,31.71% 5.84%,33.77% 6.01%,35.73% 6.08%,37.56% 5.90%,39.29% 5.37%,40.95% 4.51%,42.62% 3.40%,44.34% 2.22%,46.16% 1.18%,48.05% 0.46%,50.00% 0.20%,51.95% 0.46%,53.84% 1.18%,55.66% 2.22%,57.38% 3.40%,59.05% 4.51%,60.71% 5.37%,62.44% 5.90%,64.27% 6.08%,66.23% 6.01%,68.29% 5.84%,70.39% 5.77%,72.44% 5.97%,74.32% 6.57%,75.97% 7.62%,77.34% 9.08%,78.46% 10.83%,79.40% 12.71%,80.28% 14.55%,81.24% 16.21%,82.39% 17.61%,83.79% 18.76%,85.45% 19.72%,87.29% 20.60%,89.17% 21.54%,90.92% 22.66%,92.38% 24.03%,93.43% 25.68%,94.03% 27.56%,94.23% 29.61%,94.16% 31.71%,93.99% 33.77%,93.92% 35.73%,94.10% 37.56%,94.63% 39.29%,95.49% 40.95%,96.60% 42.62%,97.78% 44.34%,98.82% 46.16%,99.54% 48.05%);}      /* palielinās 2×, kad var klikšķināt */
+  @media (hover:hover) and (pointer:fine){
+    html, body, a, button{cursor:none;}
+  }
+  @media (hover:none), (pointer:coarse){ .dot{display:none;} }
+
+  /* ---------- Bezgalīgā plūsma: 5 kolonnas, rindas izlīdzinātas ---------- */
+  .set{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    align-items:start;                    /* visu rindas elementu augšas vienā līnijā */
+    gap:34px var(--gap);
+    padding:var(--gap);
+  }
+  .item{display:block; grid-column:var(--c, auto); transition:opacity .45s ease;}
+
+  /* Kad kursors ir virs viena darba, pārējie pagaist */
+  @media (hover:hover){
+    .stream:has(.item:hover) .item:not(:hover){opacity:.2;}
+  }
+
+  /* Bildes: parādās pašas, ienākot ekrānā, pēc brīža pagaist (paliek tikai paraksts);
+     uz hover parādās atkal. */
+  /* Visas šūnas vienādas (kvadrāts); tajā ietilpst gan vertikāla, gan horizontāla bilde */
+  .frame{
+    position:relative; width:100%; aspect-ratio:1/1; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  img.media{
+    position:absolute; inset:10%; width:80%; height:80%;      /* mazāks par šūnu — paliek brīvs laukums */
+    object-fit:contain;                 /* bilde ietilpst pilnībā, saglabājot proporciju */
+  }
+  span.media{                            /* vietturis: pasteļkrāsas taisnstūris */
+    display:block; width:var(--w, 80%); aspect-ratio:var(--ar, 4/5);
+    background:var(--pc, #dedede);
+  }
+  .media{opacity:0; transition:opacity .9s ease;}
+  .item.on .media, .item.on .qbox{opacity:1; transition:opacity .5s ease var(--d, 0ms);}
+  .item:hover .media, .item:hover .qbox{opacity:1; transition:opacity .25s ease;}
+
+  /* Paraksti — uz hover kļūst treknāki */
+  .cap{
+    display:block; margin-top:8px;
+    font-family:var(--cg); font-weight:500; font-size:19px; line-height:1.15;
+  }
+  .item:hover .cap{font-weight:700;}
+
+  /* Citāts — tāda pati kaste kā bildei; pilnais teksts parādās tikai uz hover / ienākot ekrānā */
+  .qbox{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    width:100%; height:100%; padding:9%;
+    container-type:inline-size;
+    opacity:0; transition:opacity .9s ease;
+  }
+  .qbox p{
+    margin:0; font-family:var(--display); font-weight:400;
+    font-size:clamp(18px, 2vw, 30px); line-height:1.1;
+  }
+  @supports (font-size:1cqw){ .qbox p{font-size:clamp(17px, 10cqw, 40px);} }
+
+  /* ---------- Attēlu skatītājs: palielināts attēls uz balta fona,
+     ritinot nākamais uzritinās virsū no apakšas ---------- */
+  .viewer{
+    position:fixed; inset:0; z-index:40; background:#fff;
+    overflow-y:auto; overscroll-behavior:contain;
+    scrollbar-width:none;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s linear .3s;
+  }
+  .viewer::-webkit-scrollbar{display:none;}
+  .viewer.open{opacity:1; visibility:visible; transition:opacity .3s ease;}
+  body.viewing, body.info-open{overflow:hidden;}
+
+  /* Nosaukums, apraksts un skaitītājs — augšā, nemainās, ritinot attēlus */
+  .vhead{
+    position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:5;
+    width:min(560px, 56vw); text-align:center; pointer-events:none;
+    font-family:var(--cg); font-size:18px; line-height:1.25;
+  }
+  .vhead b, .vhead h3{display:block; font-weight:700; font-size:inherit; line-height:inherit; margin:0;}
+  .vhead span{display:block; font-weight:400;}
+  .vhead i{
+    display:block; margin-top:6px; font-style:normal;
+    font-family:var(--sans); font-weight:300; font-size:12px; line-height:1; letter-spacing:.04em;
+  }
+
+  /* Attēli NAV uz balta fona: katrs nākamais uzbrauc virsū iepriekšējam,
+     iepriekšējais paliek zem tā — veidojas kaudze */
+  .slide{
+    position:sticky; top:0; height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:116px 0 48px; pointer-events:none;
+  }
+  .slide img, .slide .pic{display:block;}
+  .slide img{
+    width:auto; height:auto;
+    max-width:min(70vw, 1200px); max-height:calc(100vh - 170px);
+  }
+  .slide .pic{
+    background:var(--pc, #ddd);
+    aspect-ratio:var(--ar, 1/1);
+    width:min(70vw, calc((100vh - 170px) * var(--arn, 1)));
+  }
+
+  /* ---------- Info lapa (pēc Wendy Andrade bio lapas): viss centrēts,
+     augšā maza pielīmēta bildīte, teksts brauc zem tās, apakšā saites ---------- */
+  .info{
+    position:fixed; inset:0; z-index:40; background:#fff;
+    overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s linear .3s;
+  }
+  .info::-webkit-scrollbar{display:none;}
+  .info.open{opacity:1; visibility:visible; transition:opacity .3s ease;}
+
+  .info-pic{                               /* fiksēta: ritinot teksts aiziet zem bildes */
+    position:fixed; top:70px; left:50%; transform:translateX(-50%); z-index:3;
+    width:150px; aspect-ratio:4/5; overflow:hidden;
+    background:#f2d4da;                    /* pasteļrozā vietturis */
+  }
+  .info-pic img{display:block; width:100%; height:100%; object-fit:cover;}
+
+  .info-inner{
+    width:min(640px, 78vw); margin:0 auto; padding:310px 0 56px;
+    min-height:calc(100vh + 320px);
+    display:flex; flex-direction:column; justify-content:space-between;
+    text-align:center; font-family:var(--cg); color:var(--fg);
+  }
+  .info-bio p{font-size:26px; line-height:1.3; margin:0 0 28px;}
+  .info-links{
+    display:flex; justify-content:center; flex-wrap:wrap; gap:10px 34px; padding-top:80px;
+    font-size:18px; line-height:1.3;
+  }
+  .info-links a, .info-links .copy{
+    font:inherit; color:inherit; background:none; border:0; padding:0;
+    text-decoration:underline; text-underline-offset:3px;
+  }
+  .copy{display:inline-flex; align-items:center; gap:8px;}
+  .copy svg{width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none;}
+  .copy .i-check{display:none;}
+  .copy.copied .i-copy{display:none;}
+  .copy.copied .i-check{display:block;}
+  .copy.copied .i-check path{stroke-dasharray:24; stroke-dashoffset:24; animation:draw .35s ease forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  @media (max-width:760px){
+    .info-pic{top:62px; width:110px;}
+    .info-inner{width:84vw; padding-top:250px;}
+    .info-bio p{font-size:21px;}
+  }
+
+  /* Pēc pēdējā attēla — nākamais projekts, tāds pats kā sākuma lapā (viena šūna) */
+  .vnext{
+    background:#fff; min-height:100vh; padding:40px 0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .vnext .set{width:100%;}
+  .vnext .item{grid-column:3;}
+  @media (max-width:1000px){ .vnext .item{grid-column:2;} }
+  @media (max-width:560px){ .vnext .item{grid-column:1 / -1; width:55%; justify-self:center;} }
+  @media (max-width:560px){
+    .vhead{width:58vw;}
+    .slide{padding-top:140px;}
+    .slide img{max-width:88vw; max-height:calc(100vh - 190px);}
+    .slide .pic{width:min(88vw, calc((100vh - 190px) * var(--arn, 1)));}
+  }
+
+  @media (prefers-reduced-motion:reduce){ .ui,.item,.media,.qbox,.dot,.viewer{transition:none !important;} }
+
+  @media (max-width:1000px){
+    .set{grid-template-columns:repeat(3, 1fr);}
+    .item{grid-column:auto;}
+  }
+  @media (max-width:560px){
+    :root{--gap:12px;}
+    .set{grid-template-columns:repeat(2, 1fr); padding-top:48px; row-gap:26px;}
+    .menu{top:12px; font-size:11px; gap:14px;}
+    .menu-l{left:12px;} .menu-r{right:12px; gap:10px;}
+    .name-l{left:8px;} .name-r{right:8px;}
+    .cap{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+
+<h1 class="sr">Elza Bērziņa — Multimediju māksliniece</h1>
+<a class="ui name name-l" href="#" aria-label="Elza Bērziņa — Par mani">Elza</a>
+<a class="ui name name-r" href="#" aria-hidden="true" tabindex="-1">Bērziņa</a>
+
+<!-- Info un Portfolio lapas vēl tiks izveidotas — pagaidām saites ir tukšas -->
+<nav class="ui menu menu-l">
+  <a href="#" id="infoLink"><span lang="lv" data-t="Par mani">Par mani</span><span lang="en" data-t="About">About</span></a>
+  <a href="#" class="active" id="portfolioLink" data-t="Portfolio">Portfolio</a>
+</nav>
+<div class="ui menu menu-r">
+  <button data-lang="lv" class="active" data-t="LV">LV</button>
+  <button data-lang="en" data-t="EN">EN</button>
+</div>
+
+<div class="dot" id="dot"></div>
+
+<main class="stream" id="stream">
+  <h2 class="sr">Portfolio</h2>
+  <div class="set" id="set"></div>   <!-- šo aizpilda skripts no saraksta IMAGES -->
+</main>
+
+<!-- ✏️ REDIĢĒT — "PAR MANI" LAPA: portrets (zemāk), trīs teksta rindkopas (lv + en), Instagram un e-pasts.
+     Meklē šo lapu ar Ctrl+F: "REDIĢĒT" -->
+<!-- Info lapa (atveras ar "Par mani" vai uzklikšķinot uz ELZA / BĒRZIŅA) -->
+<div class="info" id="info" aria-hidden="true">
+
+  <!-- Maza bildīte, pielīmēta augšā: paliek vietā, kamēr teksts brauc zem tās.
+       Nomaini <span class="pic-ph"></span> pret <img src="images/portrets.jpg" alt="Elza Bērziņa"> -->
+  <div class="info-pic"><span class="pic-ph"></span></div>
+
+  <div class="info-inner">
+    <h2 class="sr"><span lang="lv">Par mani</span><span lang="en">About</span></h2>
+    <div class="info-bio">
+      <p>
+        <span lang="lv">Elza Bērziņa ir māksliniece no Latvijas. Šeit ieliec īsu biogrāfiju — kur dzīvo, ko studēji, ar kādiem medijiem strādā un kas Tevi interesē.</span>
+        <span lang="en">Elza Bērziņa is an artist from Latvia. Add a short biography here — where you live, what you studied, which media you work with and what interests you.</span>
+      </p>
+      <p>
+        <span lang="lv">Šeit var pastāstīt par darba pieeju — kādas tēmas, materiāli un idejas atkārtojas darbos un kā tie rodas.</span>
+        <span lang="en">Here you can describe your approach — which themes, materials and ideas return in the work and how it comes about.</span>
+      </p>
+      <p>
+        <span lang="lv">Šeit var minēt izstādes, rezidences, sadarbības un publikācijas.</span>
+        <span lang="en">Here you can mention exhibitions, residencies, collaborations and publications.</span>
+      </p>
+    </div>
+
+    <!-- Apakšā: Instagram un e-pasts (e-pasts neatver pastu — uz klikšķi tikai nokopējas) -->
+    <!-- ✏️ REDIĢĒT: Instagram saite un e-pasts (e-pastu ieraksti DIVOS vietās: data-copy="…" un tekstā) -->
+    <div class="info-links">
+      <a href="https://www.instagram.com/erzabelzina" target="_blank" rel="noopener">erzabelzina</a>
+      <button type="button" class="copy" data-copy="untitled@untitled.com">
+        <span class="t">untitled@untitled.com</span>
+        <svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>
+        <svg class="i-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        <span class="sr-only" role="status" aria-live="polite"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Attēlu skatītājs (atveras, uzklikšķinot uz attēla) -->
+<div class="viewer" id="viewer" aria-hidden="true">
+  <div class="vhead">
+    <h3 id="vtitle"></h3>
+    <span id="vdesc"></span>
+    <i id="counter">01 / 05</i>
+  </div>
+  <div id="vslides"></div>
+  <div class="vnext" id="vnext"></div>
+</div>
+
+<script>
+/* =====================================================================
+   ✏️ REDIĢĒT 1) TAVAS BILDES UN DARBU DAUDZUMS
+   Darbu daudzums = tik, cik ierakstīsi sarakstā IMAGES zemāk (viens ieraksts = viens darbs).
+   Bez nosaukuma paraksts ir automātisks: untitled, untitled 02, untitled 03 …
+   Ar title:"…" paraksts būs tavs nosaukums.
+   Kā ielikt bildes no GitHub: repo mapē images augšupielādē failus, tad šeit raksti "images/faila-nosaukums.jpg"
+   (ceļš ir relatīvs — bez https://, bez github.com; reģistrs un paplašinājums jāsaskan precīzi).
+   Ieraksti failu nosaukumus no mapes images (tā pati mape, kur index.html).
+   Ja bilžu ir par maz, lai aizpildītu režģi, tās atkārtosies.
+   Kamēr saraksts ir tukšs, tiek rādīti gaišpelēki vietturi.
+   ===================================================================== */
+function altText(t){ return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;') + ' — Elza Bērziņa, māksla'; }
+var IMAGES = [
+  // Vienkārši: "images/foto-01.jpg",
+  // SEO: faila nosaukumā lieto īstus vārdus (piem. "images/imagination-vr-2022.jpg"), nevis IMG_123.jpg; alt tekstu veido no title.
+  // Vai ar savu nosaukumu, aprakstu un projekta attēliem (tie uzritinās viens virs otra):
+  // { src:"images/projekts1/01.jpg", title:"Projekta nosaukums", desc:"Īss apraksts",
+  //   more:["images/projekts1/02.jpg", "images/projekts1/03.jpg"] },
+];
+
+/* ✏️ REDIĢĒT 2) CITĀTI režģī (5 gab., bez paraksta, nav atverami) */
+var QUOTES = [
+  "Lorem ipsum dolor sit amet",
+  "Dolor sit amet consectetur",
+  "Sed do eiusmod tempor",
+  "Ut enim ad minim veniam",
+  "Duis aute irure dolor"
+];
+
+/* ✏️ REDIĢĒT 3) Režģa garums: cik rindu vienā ciklā (katrā 5 kolonnas). Vairāk rindu = vairāk dažādu darbu pirms atkārtošanās. */
+var ROWS = 10;      // cik rindas vienā ciklā (5 kolonnas katrā)
+</script>
+
+<script>
+(function(){
+  var body = document.body;
+  var stream = document.getElementById('stream');
+  var set = document.getElementById('set');
+  var COLS = 5;
+
+  /* ----- Režģa ģenerēšana (vienāda katrā ielādē) ----- */
+  function rng(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rand = rng(11);
+  function shuffle(a){
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(rand() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  // vietturi: vertikāli un horizontāli taisnstūri pasteļkrāsās (kamēr nav īsto bilžu)
+  var PH = [
+    {w:'64%', ar:'4/5'}, {w:'80%', ar:'5/4'}, {w:'60%', ar:'3/4'},
+    {w:'80%', ar:'4/3'}, {w:'53%', ar:'2/3'}, {w:'80%', ar:'3/2'}
+  ];
+  var PH_COLORS = ['#f2d4da', '#d3e2f0', '#dedede', '#f4e8ad'];   // rozā, zila, pelēka, dzeltena
+  var ITEMS = IMAGES.map(function(x){ return typeof x === 'string' ? {src:x} : x; });
+  var nImg = ITEMS.length || PH.length;
+  var order = shuffle(Array.apply(null, Array(nImg)).map(function(_, i){ return i; }));
+  var ptr = 0;
+  function nextImage(avoid){
+    for (var tries = 0; tries < nImg + 1; tries++){
+      if (ptr >= order.length){ order = shuffle(order); ptr = 0; }
+      var c = order[ptr++];
+      if (nImg < 3 || avoid.indexOf(c) === -1) return c;
+    }
+    return order[0];
+  }
+
+  // citātu rindas un kolonnas (5 citāti, vienmērīgi izkaisīti)
+  // izkārtojums (citāti, tukšās šūnas) ir neatkarīgs no bilžu skaita
+  var lrand = rng(5);
+  var quoteAt = {};
+  var qRows = [1, 3, 5, 7, 9].filter(function(r){ return r < ROWS; });
+  var lastQCol = -1;
+  QUOTES.slice(0, qRows.length).forEach(function(q, i){
+    var col;
+    do { col = Math.floor(lrand() * COLS); } while (col === lastQCol);
+    lastQCol = col;
+    quoteAt[qRows[i] + ',' + col] = q;
+  });
+  // pa retam (3 rindās no 10) viena tukša šūna — pārējās rindas ir pilnas
+  var emptyAt = {};
+  [2, 4, 8].filter(function(r){ return r < ROWS; }).forEach(function(r){
+    emptyAt[r] = Math.floor(lrand() * COLS);
+  });
+
+  var grid = [];          // iepriekšējā rinda atkārtojumu novēršanai
+  var html = [];
+  var n = 0;
+  for (var r = 0; r < ROWS; r++){
+    var empty = (emptyAt[r] === undefined) ? -1 : emptyAt[r];
+    grid[r] = [];
+    for (var c = 0; c < COLS; c++){
+      var key = r + ',' + c;
+      if (quoteAt[key]){
+        var q = quoteAt[key];
+        grid[r][c] = -1;
+        html.push('<div class="item quote" style="--c:' + (c + 1) + '"><span class="frame"><span class="qbox"><p>' + q + '</p></span></span></div>');
+        continue;
+      }
+      if (c === empty){ grid[r][c] = -2; continue; }
+      var avoid = [];
+      if (c > 0) avoid.push(grid[r][c - 1]);
+      if (r > 0) avoid.push(grid[r - 1][c]);
+      var idx = nextImage(avoid);
+      grid[r][c] = idx;
+      n++;
+      var cap = (ITEMS.length && ITEMS[idx].title) || (n === 1 ? 'untitled' : 'untitled ' + (n < 10 ? '0' + n : n));
+      var media = ITEMS.length
+        ? '<img class="media" src="' + ITEMS[idx].src + '" alt="' + altText(ITEMS[idx].title || cap) + '" loading="lazy" decoding="async">'
+        : '<span class="media" style="--w:' + PH[idx].w + ';--ar:' + PH[idx].ar + ';--pc:' + PH_COLORS[n % PH_COLORS.length] + '"></span>';
+      html.push('<a class="item" href="#" data-n="' + n + '" data-p="' + idx + '" data-ci="' + (n % PH_COLORS.length) + '" style="--c:' + (c + 1) + '"><span class="frame">' + media + '</span><span class="cap">' + cap + '</span></a>');
+    }
+  }
+  set.innerHTML = html.join('');
+
+  /* ----- Bezgalīgā cilpa: dublējam bloku; nonākot līdz otrajam, atgriežamies sākumā ----- */
+  var clone = set.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.setAttribute('aria-hidden', 'true');
+  clone.querySelectorAll('a').forEach(function(a){ a.tabIndex = -1; });   // hover joprojām strādā
+  stream.appendChild(clone);
+
+  var period = 0;
+  function measure(){ period = clone.offsetTop - set.offsetTop; }
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if ('ResizeObserver' in window){ new ResizeObserver(measure).observe(set); }
+
+  var ticking = false;
+  function loop(){
+    ticking = false;
+    if (period > 0 && window.scrollY >= period){
+      window.scrollTo(0, window.scrollY - period);
+    }
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(loop); }
+  }, {passive:true});
+
+  /* ----- Bildes parādās, ienākot ekrānā (pēc pirmās ritināšanas), pēc brīža pagaist ----- */
+  var SHOW_MS = 1900;
+  var scrolled = false;
+  var visible = new Set();
+  var timers = new WeakMap();
+  function show(el){
+    el.style.setProperty('--d', Math.round(Math.random() * 450) + 'ms');
+    el.classList.add('on');
+    clearTimeout(timers.get(el));
+    timers.set(el, setTimeout(function(){ el.classList.remove('on'); }, SHOW_MS));
+  }
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var el = en.target;
+        if (en.isIntersecting){
+          visible.add(el);
+          if (scrolled) show(el);
+        } else {
+          visible.delete(el);
+          clearTimeout(timers.get(el));
+          el.classList.remove('on');
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.item').forEach(function(el){ io.observe(el); });
+  }
+  window.addEventListener('scroll', function(){
+    if (!scrolled){ scrolled = true; visible.forEach(show); }
+  }, {passive:true});
+
+  /* ----- Kursors: khaki aplītis, palielinās virs klikšķināmā ----- */
+  var dot = document.getElementById('dot');
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    window.addEventListener('mousemove', function(e){
+      dot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0) translate(-50%,-50%)';
+      dot.classList.add('show');
+    }, {passive:true});
+    document.addEventListener('mouseover', function(e){
+      var t = e.target.closest ? e.target : null;
+      dot.classList.toggle('big', !!(t && t.closest('a, button')));
+    });
+    document.documentElement.addEventListener('mouseleave', function(){ dot.classList.remove('show'); });
+  }
+
+  /* ----- Attēlu skatītājs ----- */
+  var viewer = document.getElementById('viewer');
+  var vslides = document.getElementById('vslides');
+  var vtitle = document.getElementById('vtitle');
+  var vdesc = document.getElementById('vdesc');
+  var counter = document.getElementById('counter');
+  var vhead = document.querySelector('.vhead');
+  var vnext = document.getElementById('vnext');
+  var vnextObserved = [];
+  var VIEW_COUNT = 5;                                    // cik attēli saslāņojas
+  /* ✏️ REDIĢĒT 4) noklusējuma apraksts zem projekta nosaukuma (ja darbam nav sava desc) */
+  var DESC = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';   // apraksts zem nosaukuma
+  var viewN = 0;
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function updateCounter(){
+    var h = viewer.clientHeight || window.innerHeight;
+    var i = Math.min(viewN, Math.floor((viewer.scrollTop + h * 0.5) / h) + 1);
+    counter.textContent = pad(i) + ' / ' + pad(viewN);
+    // kad kaudze ir beigusies un parādās nākamie projekti, nosaukums izgaist
+    var past = viewer.scrollTop - (viewN - 1) * h;
+    vhead.style.opacity = past <= 0 ? 1 : Math.max(0, 1 - past / (h * 0.6));
+  }
+
+  // nākamie projekti zem kaudzes — tādi paši elementi kā sākuma lapā
+  function buildNext(item){
+    vnextObserved.forEach(function(el){ if (io) io.unobserve(el); });
+    vnextObserved = [];
+    var cells = Array.prototype.slice.call(set.querySelectorAll('.item:not(.quote)'));
+    var pos = -1;
+    cells.forEach(function(c, i){ if (c.dataset.n === item.dataset.n) pos = i; });
+    var order = cells.slice(pos + 1).concat(cells.slice(0, Math.max(pos, 0))).slice(0, 1);
+    var wrap = document.createElement('div');
+    wrap.className = 'set';
+    order.forEach(function(c){
+      var cl = c.cloneNode(true);
+      cl.style.removeProperty('--c');
+      cl.classList.remove('on');
+      wrap.appendChild(cl);
+      vnextObserved.push(cl);
+    });
+    vnext.innerHTML = '';
+    vnext.appendChild(wrap);
+    if (io) vnextObserved.forEach(function(el){ io.observe(el); });
+  }
+  function openViewer(item){
+    var idx = Number(item.dataset.p) || 0;
+    var ci = Number(item.dataset.ci) || 0;
+    var proj = ITEMS.length ? ITEMS[idx] : null;
+    var slides = [];
+
+    if (proj){
+      var srcs = [proj.src];
+      if (proj.more && proj.more.length){
+        srcs = srcs.concat(proj.more);                    // projekta paša attēli
+      } else {                                            // kamēr nav projekta attēlu — aizpilda ar nākamajiem no saraksta
+        for (var k = 1; srcs.length < Math.min(VIEW_COUNT, ITEMS.length); k++){
+          srcs.push(ITEMS[(idx + k) % ITEMS.length].src);
+        }
+      }
+      slides = srcs.map(function(src){ return '<section class="slide"><img src="' + src + '" alt="' + altText(item.querySelector('.cap').textContent) + '"></section>'; });
+    } else {
+      for (var j = 0; j < VIEW_COUNT; j++){
+        var ph = PH[(idx + j) % PH.length], ar = ph.ar.split('/');
+        slides.push('<section class="slide"><span class="pic" style="--ar:' + ph.ar +
+          ';--arn:' + (Number(ar[0]) / Number(ar[1])) +
+          ';--pc:' + PH_COLORS[(ci + j) % PH_COLORS.length] + '"></span></section>');
+      }
+    }
+
+    vtitle.textContent = item.querySelector('.cap').textContent;     // nosaukums un apraksts nemainās
+    vdesc.textContent = (proj && proj.desc) || DESC;
+    vslides.innerHTML = slides.join('');
+    viewN = slides.length;
+    buildNext(item);
+    viewer.scrollTop = 0;
+    updateCounter();
+    viewer.classList.add('open');
+    viewer.setAttribute('aria-hidden', 'false');
+    body.classList.add('viewing');
+  }
+  /* ----- Info lapa ----- */
+  var info = document.getElementById('info');
+  var infoLink = document.getElementById('infoLink');
+  var portfolioLink = document.getElementById('portfolioLink');
+  function setActive(which){
+    infoLink.classList.toggle('active', which === 'info');
+    portfolioLink.classList.toggle('active', which !== 'info');
+  }
+  function openInfo(){
+    closeViewer();
+    info.scrollTop = 0;
+    info.classList.add('open');
+    info.setAttribute('aria-hidden', 'false');
+    body.classList.add('info-open');
+    setActive('info');
+  }
+  function closeInfo(){
+    info.classList.remove('open');
+    info.setAttribute('aria-hidden', 'true');
+    body.classList.remove('info-open');
+    setActive('portfolio');
+  }
+
+  function closeViewer(){
+    viewer.classList.remove('open');
+    viewer.setAttribute('aria-hidden', 'true');
+    body.classList.remove('viewing');
+  }
+  viewer.addEventListener('scroll', updateCounter, {passive:true});
+  window.addEventListener('resize', updateCounter);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ closeViewer(); closeInfo(); } });
+
+  /* E-pasts: uz klikšķi tikai nokopējas */
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text).catch(function(){ legacyCopy(text); });
+    }
+    legacyCopy(text);
+  }
+  function legacyCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest && e.target.closest('[data-copy]');
+    if (!btn) return;
+    copyText(btn.getAttribute('data-copy'));
+    btn.classList.add('copied');
+    var live = btn.querySelector('[aria-live]');
+    if (live) live.textContent = document.documentElement.lang === 'en' ? 'Copied' : 'Nokopēts';
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function(){ btn.classList.remove('copied'); if (live) live.textContent = ''; }, 1800);
+  });
+
+  /* Klikšķi: attēls atver skatītāju, "Portfolio" aizver; pārējās "#" saites nemet uz augšu */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href="#"]');
+    if (!a) return;
+    e.preventDefault();
+    if (a.classList.contains('item') && !a.classList.contains('quote')) openViewer(a);
+    else if (a.id === 'infoLink' || a.classList.contains('name')) openInfo();
+    else if (a.id === 'portfolioLink'){ closeInfo(); closeViewer(); }
+  });
+
+  /* ----- Valoda LV / EN ----- */
+  var langBtns = document.querySelectorAll('[data-lang]');
+  function setLang(l){
+    document.documentElement.lang = l;
+    langBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.lang === l); });
+    try{ localStorage.setItem('lang', l); }catch(e){}
+  }
+  langBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.lang); });
+  });
+  var saved = null;
+  try{ saved = localStorage.getItem('lang'); }catch(e){}
+  setLang(saved === 'en' ? 'en' : 'lv');
+})();
+</script>
+</body>
+</html>
