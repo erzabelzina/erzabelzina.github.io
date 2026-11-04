@@ -118,11 +118,20 @@
   .item:hover .media, .item:hover .qbox{opacity:1; transition:opacity .25s ease;}
 
   /* Paraksti — uz hover kļūst treknāki */
+  /* Dinamisks pasvītrojums: uz hover uzzīmējas no kreisās uz labo (paraksti, izvēlne, Instagram/e-pasts) */
+  .cap, .menu a, .menu button, .info-links a, .info-links .copy{
+    background-image:linear-gradient(currentColor, currentColor);
+    background-repeat:no-repeat; background-position:0 100%; background-size:0 1px;
+    transition:background-size .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .item:hover .cap, .menu a:hover, .menu button:hover, .info-links a:hover, .info-links .copy:hover{background-size:100% 1px;}
+  .menu a, .menu button{padding-bottom:3px;}
   .cap{
+    width:fit-content; max-width:100%;
     display:block; margin-top:8px;
     font-family:var(--cg); font-weight:500; font-size:19px; line-height:1.15;
   }
-  .item:hover .cap{font-weight:700; -webkit-text-stroke:.7px currentColor;}   /* vēl treknāks uz hover */
+  .item:hover .cap{font-weight:700;}
 
   /* Citāts — tāda pati kaste kā bildei; pilnais teksts parādās tikai uz hover / ienākot ekrānā */
   .qbox{
@@ -212,7 +221,7 @@
     font:inherit; color:inherit; background:none; border:0; padding:0;
     text-decoration:none;
   }
-  .info-links a:hover, .info-links .copy:hover{font-weight:700; -webkit-text-stroke:.7px currentColor;}
+  .info-links a:hover, .info-links .copy:hover{font-weight:700;}
   .copy{display:inline-flex; align-items:center; gap:8px;}
   .copy svg{width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none;}
   .copy .i-check{display:none;}
