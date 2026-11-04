@@ -77,7 +77,7 @@
   }
   .dot.show{opacity:1;}
   .dot.big{width:18px; height:18px;}   /* mazliet palielinās uz aktīviem elementiem */
-  .dot.inv{background:#fff; mix-blend-mode:difference;}   /* uz tekstiem (izvēlne, saites) zem punkta viss invertējas; uz attēliem — nē */
+  .dot.inv{background:#fff; mix-blend-mode:difference;}   /* uz jebkura aktīva elementa zem punkta viss invertējas */
   @media (hover:hover) and (pointer:fine){
     html, body, a, button{cursor:none;}
   }
@@ -553,7 +553,7 @@ var ROWS = 10;      // cik rindas vienā ciklā (5 kolonnas katrā)
     document.addEventListener('mouseover', function(e){
       var t = e.target.closest ? e.target : null;
       dot.classList.toggle('big', !!(t && t.closest('a, button')));
-      dot.classList.toggle('inv', !!(t && t.closest('.menu a, .menu button, .name, .info-links a, .info-links button')));
+      dot.classList.toggle('inv', !!(t && t.closest('a, button')));
     });
     document.documentElement.addEventListener('mouseleave', function(){ dot.classList.remove('show'); });
   }
