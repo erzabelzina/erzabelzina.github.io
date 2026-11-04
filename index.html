@@ -12,12 +12,12 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Inter+Tight:wght@300;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;500;700&family=Inter+Tight:wght@300;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#ffffff; --fg:#111111;
     --dot:#000000;                     /* kursora krāsa */
-    --cg:"Cormorant Garamond", Georgia, serif;
+    --cg:"Cormorant Infant", Georgia, serif;
     --sans:"Inter Tight", "Helvetica Neue", Arial, sans-serif;
     --display:"DM Serif Display", Georgia, serif;
     --gap:18px;
@@ -63,7 +63,7 @@
     font-size:33px; text-transform:uppercase;
     line-height:1; letter-spacing:.02em; white-space:nowrap;
   }
-  .name img{display:block; height:27px; width:auto; filter:brightness(0) invert(1);}   /* SVG kļūst balts → difference to dara melnu uz balta */
+  .name img{display:block; height:54px; width:auto; filter:brightness(0) invert(1);}   /* SVG kļūst balts → difference to dara melnu uz balta */
   .name-l{left:14px;}
   .name-r{right:14px;}
 
@@ -264,6 +264,7 @@
     .menu{top:12px; font-size:11px; gap:14px;}
     .menu-l{left:12px;} .menu-r{right:12px; gap:10px;}
     .name-l{left:8px;} .name-r{right:8px;}
+    .name img{height:40px;}
     .cap{font-size:17px;}
   }
 </style>
@@ -272,7 +273,7 @@
 
 <h1 class="sr">Elza Bērziņa — Multimediju māksliniece</h1>
 <!-- ✏️ REDIĢĒT: ELZA un BĒRZIŅA kā SVG — ieliec failus images/elza.svg un images/berzina.svg
-     (kamēr failu nav, rāda parastu tekstu). Izmēru maina .name img{height:27px} -->
+     (kamēr failu nav, rāda parastu tekstu). Izmēru maina .name img{height:54px} -->
 <a class="ui name name-l" href="#" aria-label="Elza Bērziņa — Par"><img src="images/elza.svg" alt="Elza" onerror="this.replaceWith(document.createTextNode('Elza'))"></a>
 <a class="ui name name-r" href="#" aria-hidden="true" tabindex="-1"><img src="images/berzina.svg" alt="" onerror="this.replaceWith(document.createTextNode('Bērziņa'))"></a>
 
