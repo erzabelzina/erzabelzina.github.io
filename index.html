@@ -63,6 +63,7 @@
     font-size:30px; text-transform:uppercase;
     line-height:1; letter-spacing:.02em; white-space:nowrap;
   }
+  .name img{display:block; height:24px; width:auto; filter:brightness(0) invert(1);}   /* SVG kļūst balts → difference to dara melnu uz balta */
   .name-l{left:14px;}
   .name-r{right:14px;}
 
@@ -73,10 +74,10 @@
     background:#fff; pointer-events:none;
     mix-blend-mode:difference;   /* balts + difference = melns uz balta, zem tā viss invertējas */
     opacity:0;
-    transition:opacity .2s ease, width .18s ease, height .18s ease, background-color .18s ease;
+    transition:opacity .2s ease;
   }
   .dot.show{opacity:1;}
-  .dot.big{width:40px; height:40px; clip-path:polygon(99.80% 50.00%,99.54% 51.95%,98.82% 53.84%,97.78% 55.66%,96.60% 57.38%,95.49% 59.05%,94.63% 60.71%,94.10% 62.44%,93.92% 64.27%,93.99% 66.23%,94.16% 68.29%,94.23% 70.39%,94.03% 72.44%,93.43% 74.32%,92.38% 75.97%,90.92% 77.34%,89.17% 78.46%,87.29% 79.40%,85.45% 80.28%,83.79% 81.24%,82.39% 82.39%,81.24% 83.79%,80.28% 85.45%,79.40% 87.29%,78.46% 89.17%,77.34% 90.92%,75.97% 92.38%,74.32% 93.43%,72.44% 94.03%,70.39% 94.23%,68.29% 94.16%,66.23% 93.99%,64.27% 93.92%,62.44% 94.10%,60.71% 94.63%,59.05% 95.49%,57.38% 96.60%,55.66% 97.78%,53.84% 98.82%,51.95% 99.54%,50.00% 99.80%,48.05% 99.54%,46.16% 98.82%,44.34% 97.78%,42.62% 96.60%,40.95% 95.49%,39.29% 94.63%,37.56% 94.10%,35.73% 93.92%,33.77% 93.99%,31.71% 94.16%,29.61% 94.23%,27.56% 94.03%,25.68% 93.43%,24.03% 92.38%,22.66% 90.92%,21.54% 89.17%,20.60% 87.29%,19.72% 85.45%,18.76% 83.79%,17.61% 82.39%,16.21% 81.24%,14.55% 80.28%,12.71% 79.40%,10.83% 78.46%,9.08% 77.34%,7.62% 75.97%,6.57% 74.32%,5.97% 72.44%,5.77% 70.39%,5.84% 68.29%,6.01% 66.23%,6.08% 64.27%,5.90% 62.44%,5.37% 60.71%,4.51% 59.05%,3.40% 57.38%,2.22% 55.66%,1.18% 53.84%,0.46% 51.95%,0.20% 50.00%,0.46% 48.05%,1.18% 46.16%,2.22% 44.34%,3.40% 42.62%,4.51% 40.95%,5.37% 39.29%,5.90% 37.56%,6.08% 35.73%,6.01% 33.77%,5.84% 31.71%,5.77% 29.61%,5.97% 27.56%,6.57% 25.68%,7.62% 24.03%,9.08% 22.66%,10.83% 21.54%,12.71% 20.60%,14.55% 19.72%,16.21% 18.76%,17.61% 17.61%,18.76% 16.21%,19.72% 14.55%,20.60% 12.71%,21.54% 10.83%,22.66% 9.08%,24.03% 7.62%,25.68% 6.57%,27.56% 5.97%,29.61% 5.77%,31.71% 5.84%,33.77% 6.01%,35.73% 6.08%,37.56% 5.90%,39.29% 5.37%,40.95% 4.51%,42.62% 3.40%,44.34% 2.22%,46.16% 1.18%,48.05% 0.46%,50.00% 0.20%,51.95% 0.46%,53.84% 1.18%,55.66% 2.22%,57.38% 3.40%,59.05% 4.51%,60.71% 5.37%,62.44% 5.90%,64.27% 6.08%,66.23% 6.01%,68.29% 5.84%,70.39% 5.77%,72.44% 5.97%,74.32% 6.57%,75.97% 7.62%,77.34% 9.08%,78.46% 10.83%,79.40% 12.71%,80.28% 14.55%,81.24% 16.21%,82.39% 17.61%,83.79% 18.76%,85.45% 19.72%,87.29% 20.60%,89.17% 21.54%,90.92% 22.66%,92.38% 24.03%,93.43% 25.68%,94.03% 27.56%,94.23% 29.61%,94.16% 31.71%,93.99% 33.77%,93.92% 35.73%,94.10% 37.56%,94.63% 39.29%,95.49% 40.95%,96.60% 42.62%,97.78% 44.34%,98.82% 46.16%,99.54% 48.05%);}      /* palielinās 2×, kad var klikšķināt */
+  .dot.inv{background:#fff; mix-blend-mode:difference;}   /* uz tekstiem (izvēlne, saites) zem punkta viss invertējas; uz attēliem — nē */
   @media (hover:hover) and (pointer:fine){
     html, body, a, button{cursor:none;}
   }
@@ -211,6 +212,7 @@
     font:inherit; color:inherit; background:none; border:0; padding:0;
     text-decoration:underline; text-underline-offset:3px;
   }
+  .info-links a:hover, .info-links .copy:hover{font-weight:700;}
   .copy{display:inline-flex; align-items:center; gap:8px;}
   .copy svg{width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none;}
   .copy .i-check{display:none;}
@@ -260,8 +262,10 @@
 <body>
 
 <h1 class="sr">Elza Bērziņa — Multimediju māksliniece</h1>
-<a class="ui name name-l" href="#" aria-label="Elza Bērziņa — Par">Elza</a>
-<a class="ui name name-r" href="#" aria-hidden="true" tabindex="-1">Bērziņa</a>
+<!-- ✏️ REDIĢĒT: ELZA un BĒRZIŅA kā SVG — ieliec failus images/elza.svg un images/berzina.svg
+     (kamēr failu nav, rāda parastu tekstu). Izmēru maina .name img{height:24px} -->
+<a class="ui name name-l" href="#" aria-label="Elza Bērziņa — Par"><img src="images/elza.svg" alt="Elza" onerror="this.replaceWith(document.createTextNode('Elza'))"></a>
+<a class="ui name name-r" href="#" aria-hidden="true" tabindex="-1"><img src="images/berzina.svg" alt="" onerror="this.replaceWith(document.createTextNode('Bērziņa'))"></a>
 
 <!-- Info un Portfolio lapas vēl tiks izveidotas — pagaidām saites ir tukšas -->
 <nav class="ui menu menu-l">
@@ -539,7 +543,7 @@ var ROWS = 10;      // cik rindas vienā ciklā (5 kolonnas katrā)
     }, {passive:true});
     document.addEventListener('mouseover', function(e){
       var t = e.target.closest ? e.target : null;
-      dot.classList.toggle('big', !!(t && t.closest('a, button')));
+      dot.classList.toggle('inv', !!(t && t.closest('.menu a, .menu button, .name, .info-links a, .info-links button')));
     });
     document.documentElement.addEventListener('mouseleave', function(){ dot.classList.remove('show'); });
   }
