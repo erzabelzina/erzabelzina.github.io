@@ -646,7 +646,20 @@ if (REPEATS > 0 && IMAGES.length){
     if (io) vnextObserved.forEach(function(el){ io.observe(el); });
   }
   /* apraksta joslas augstums → bildes sākas zem tā ar nelielu brīvu laukumu */
-  function fitHead(){ viewer.style.setProperty('--vh-h', Math.ceil(vhead.offsetHeight) + 'px'); }
+  /* ✏️ REDIĢĒT 6) Atsauces projekts: attēli sākas zem tāda apraksta garuma, kāds ir šim projektam.
+     Garāki apraksti par to var aizsegt attēlu — saīsini tos vai maini nosaukumu šeit. */
+  var REF_TITLE = 'Clouds';
+  function fitHead(){
+    var own = Math.ceil(vhead.offsetHeight), ref = 0;
+    var rp = ITEMS.filter(function(x){ return x.title === REF_TITLE; })[0];
+    if (rp && rp.desc){
+      var keep = vdesc.textContent, keepT = vtitle.textContent;
+      vtitle.textContent = REF_TITLE; vdesc.textContent = rp.desc;
+      ref = Math.ceil(vhead.offsetHeight);
+      vtitle.textContent = keepT; vdesc.textContent = keep;
+    }
+    viewer.style.setProperty('--vh-h', Math.max(own, ref) + 'px');
+  }
   window.addEventListener('resize', fitHead);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHead);
   function openViewer(item){
