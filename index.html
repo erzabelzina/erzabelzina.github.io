@@ -161,7 +161,7 @@
   /* Nosaukums, apraksts un skaitītājs — augšā, nemainās, ritinot attēlus */
   .vhead{
     position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:5;
-    width:min(560px, 56vw); text-align:center; pointer-events:none;
+    width:min(1000px, 82vw); text-align:center; pointer-events:none;   /* plata apraksta josla */
     font-family:var(--cg); font-size:18px; line-height:1.25;
   }
   .vhead b, .vhead h3{display:block; font-weight:700; font-size:inherit; line-height:inherit; margin:0;}
@@ -176,17 +176,17 @@
   .slide{
     position:sticky; top:0; height:100vh;
     display:flex; align-items:center; justify-content:center;
-    padding:116px 0 48px; pointer-events:none;
+    padding:calc(var(--vh-h, 110px) + 40px) 0 44px; pointer-events:none;   /* brīvs laukums zem apraksta */
   }
   .slide img, .slide video, .slide .pic{display:block;}
   .slide img, .slide video{
     width:auto; height:auto;
-    max-width:min(70vw, 1200px); max-height:calc(100vh - 170px);
+    max-width:min(70vw, 1200px); max-height:calc(100vh - var(--vh-h, 110px) - 84px);
   }
   .slide .pic{
     background:var(--pc, #ddd);
     aspect-ratio:var(--ar, 1/1);
-    width:min(70vw, calc((100vh - 170px) * var(--arn, 1)));
+    width:min(70vw, calc((100vh - var(--vh-h, 110px) - 84px) * var(--arn, 1)));
   }
 
   /* ---------- Info lapa: viss centrēts,
@@ -246,10 +246,10 @@
   @media (max-width:1000px){ .vnext .item{grid-column:2;} }
   @media (max-width:560px){ .vnext .item{grid-column:1 / -1; width:55%; justify-self:center;} }
   @media (max-width:560px){
-    .vhead{width:58vw;}
-    .slide{padding-top:140px;}
-    .slide img, .slide video{max-width:88vw; max-height:calc(100vh - 190px);}
-    .slide .pic{width:min(88vw, calc((100vh - 190px) * var(--arn, 1)));}
+    .vhead{width:90vw; font-size:16px; max-height:40vh; overflow-y:auto; pointer-events:auto; scrollbar-width:none;}   /* garš apraksts telefonā ritināms */
+    .vhead span{font-size:16px;}
+    .slide img, .slide video{max-width:88vw;}
+    .slide .pic{width:min(88vw, calc((100vh - var(--vh-h, 110px) - 84px) * var(--arn, 1)));}
   }
 
   @media (prefers-reduced-motion:reduce){ .ui,.item,.media,.qbox,.dot,.viewer{transition:none !important;} }
@@ -645,6 +645,10 @@ if (REPEATS > 0 && IMAGES.length){
     vnext.appendChild(wrap);
     if (io) vnextObserved.forEach(function(el){ io.observe(el); });
   }
+  /* apraksta joslas augstums → bildes sākas zem tā ar nelielu brīvu laukumu */
+  function fitHead(){ viewer.style.setProperty('--vh-h', Math.ceil(vhead.offsetHeight) + 'px'); }
+  window.addEventListener('resize', fitHead);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHead);
   function openViewer(item){
     var idx = Number(item.dataset.p) || 0;
     var ci = Number(item.dataset.ci) || 0;
@@ -670,6 +674,7 @@ if (REPEATS > 0 && IMAGES.length){
     vdesc.textContent = (proj && proj.desc) || DESC;
     vslides.innerHTML = slides.join('');
     viewN = slides.length;
+    fitHead();
     buildNext(item);
     viewer.scrollTop = 0;
     updateCounter();
