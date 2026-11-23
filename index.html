@@ -160,7 +160,7 @@
 
   /* Nosaukums, apraksts un skaitītājs — augšā, nemainās, ritinot attēlus */
   .vhead{
-    position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:5;
+    position:fixed; top:44px; left:50%; transform:translateX(-50%); z-index:5;   /* zem izvēlnes rindas */
     width:min(1000px, 82vw); text-align:center; pointer-events:none;   /* plata apraksta josla */
     font-family:var(--cg); font-size:18px; line-height:1.25;
   }
@@ -176,17 +176,17 @@
   .slide{
     position:sticky; top:0; height:100vh;
     display:flex; align-items:center; justify-content:center;
-    padding:calc(var(--vh-h, 110px) + 40px) 0 44px; pointer-events:none;   /* brīvs laukums zem apraksta */
+    padding:calc(var(--vh-h, 110px) + 70px) 0 44px; pointer-events:none;   /* brīvs laukums zem apraksta */
   }
   .slide img, .slide video, .slide .pic{display:block;}
   .slide img, .slide video{
     width:auto; height:auto;
-    max-width:min(70vw, 1200px); max-height:calc(100vh - var(--vh-h, 110px) - 84px);
+    max-width:min(70vw, 1200px); max-height:calc(100vh - var(--vh-h, 110px) - 114px);
   }
   .slide .pic{
     background:var(--pc, #ddd);
     aspect-ratio:var(--ar, 1/1);
-    width:min(70vw, calc((100vh - var(--vh-h, 110px) - 84px) * var(--arn, 1)));
+    width:min(70vw, calc((100vh - var(--vh-h, 110px) - 114px) * var(--arn, 1)));
   }
 
   /* ---------- Info lapa: viss centrēts,
@@ -249,7 +249,7 @@
     .vhead{width:90vw; font-size:16px; max-height:40vh; overflow-y:auto; pointer-events:auto; scrollbar-width:none;}   /* garš apraksts telefonā ritināms */
     .vhead span{font-size:16px;}
     .slide img, .slide video{max-width:88vw;}
-    .slide .pic{width:min(88vw, calc((100vh - var(--vh-h, 110px) - 84px) * var(--arn, 1)));}
+    .slide .pic{width:min(88vw, calc((100vh - var(--vh-h, 110px) - 114px) * var(--arn, 1)));}
   }
 
   @media (prefers-reduced-motion:reduce){ .ui,.item,.media,.qbox,.dot,.viewer{transition:none !important;} }
