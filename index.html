@@ -165,7 +165,7 @@
     font-family:var(--cg); font-size:18px; line-height:1.25;
   }
   .vhead b, .vhead h3{display:block; font-weight:700; font-size:inherit; line-height:inherit; margin:0;}
-  .vhead span{display:block; font-weight:400; font-size:20px;}   /* darba apraksts +2 px */
+  .vhead #vdesc{display:block; font-weight:400; font-size:20px;}   /* darba apraksts +2 px */
   .vhead i{
     display:block; margin-top:6px; font-style:normal;
     font-family:var(--sans); font-weight:300; font-size:12px; line-height:1; letter-spacing:.04em;
@@ -247,7 +247,7 @@
   @media (max-width:560px){ .vnext .item{grid-column:1 / -1; width:55%; justify-self:center;} }
   @media (max-width:560px){
     .vhead{width:90vw; font-size:16px; max-height:40vh; overflow-y:auto; pointer-events:auto; scrollbar-width:none;}   /* garš apraksts telefonā ritināms */
-    .vhead span{font-size:16px;}
+    .vhead #vdesc{font-size:16px;}
     .slide img, .slide video{max-width:88vw;}
     .slide .pic{width:min(88vw, calc((100vh - var(--vh-h, 110px) - 114px) * var(--arn, 1)));}
   }
@@ -353,6 +353,8 @@ var MAIL_DOMAIN = ['icloud', 'com'];   // = icloud.com
    Darbu daudzums = tik, cik ierakstīsi sarakstā IMAGES zemāk (viens ieraksts = viens darbs).
    Bez nosaukuma paraksts ir automātisks: untitled, untitled 02, untitled 03 …
    Ar title:"…" paraksts būs tavs nosaukums.
+   ANGĻU TEKSTI: pievieno titleEn:"…" un descEn:"…" (title un desc paliek latviešu valodai).
+   Piemērs: { src:"images/a.jpg", title:"Gulta", titleEn:"Bed", desc:`LV apraksts`, descEn:`EN description` }
    Video: vari ierakstīt arī .mp4 (bez skaņas, līdz ~25 MB) — tieši tāpat kā bildi.
    Kā ielikt bildes no GitHub: repo mapē images augšupielādē failus, tad šeit raksti "images/faila-nosaukums.jpg"
    (ceļš ir relatīvs — bez https://, bez github.com; reģistrs un paplašinājums jāsaskan precīzi).
@@ -365,6 +367,9 @@ function mediaTag(src, alt, cls, loadAttr){
   if (isVideo(src)) return '<video' + (cls ? ' class="' + cls + '"' : '') + ' src="' + src + '" aria-label="' + alt + '" muted loop playsinline autoplay preload="metadata"></video>';
   return '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + src + '" alt="' + alt + '"' + (loadAttr || '') + '>';
 }
+function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+/* LV/EN teksts: ja ir angļu versija, ieliek abas (parāda to, kas atbilst izvēlētajai valodai) */
+function bi(lv, en){ return en ? '<span lang="lv">' + esc(lv) + '</span><span lang="en">' + esc(en) + '</span>' : esc(lv); }
 function altText(t){ return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;') + ' — Elza Bērziņa, māksla'; }
 var IMAGES = [
   { src:"images/Gulta.jpg",
@@ -519,7 +524,8 @@ if (REPEATS > 0 && IMAGES.length){
       var media = ITEMS.length
         ? mediaTag(ITEMS[idx].src, altText(ITEMS[idx].title || cap), 'media', ' loading="lazy" decoding="async"')
         : '<span class="media" style="--w:' + PH[idx].w + ';--ar:' + PH[idx].ar + ';--pc:' + PH_COLORS[n % PH_COLORS.length] + '"></span>';
-      html.push('<a class="item" href="#" data-n="' + n + '" data-p="' + idx + '" data-ci="' + (n % PH_COLORS.length) + '" style="--c:' + (c + 1) + '"><span class="frame">' + media + '</span><span class="cap">' + cap + '</span></a>');
+      var capEn = ITEMS.length && ITEMS[idx].titleEn;
+      html.push('<a class="item" href="#" data-cap="' + esc(cap) + '" data-n="' + n + '" data-p="' + idx + '" data-ci="' + (n % PH_COLORS.length) + '" style="--c:' + (c + 1) + '"><span class="frame">' + media + '</span><span class="cap">' + bi(cap, capEn) + '</span></a>');
     }
   }
   set.innerHTML = html.join('');
@@ -648,10 +654,10 @@ if (REPEATS > 0 && IMAGES.length){
     var own = Math.ceil(vhead.offsetHeight), ref = 0;
     var rp = ITEMS.filter(function(x){ return x.title === REF_TITLE; })[0];
     if (rp && rp.desc){
-      var keep = vdesc.textContent, keepT = vtitle.textContent;
-      vtitle.textContent = REF_TITLE; vdesc.textContent = rp.desc;
+      var keep = vdesc.innerHTML, keepT = vtitle.innerHTML;
+      vtitle.innerHTML = bi(rp.title, rp.titleEn); vdesc.innerHTML = bi(rp.desc, rp.descEn);
       ref = Math.ceil(vhead.offsetHeight);
-      vtitle.textContent = keepT; vdesc.textContent = keep;
+      vtitle.innerHTML = keepT; vdesc.innerHTML = keep;
     }
     viewer.style.setProperty('--vh-h', Math.max(own, ref) + 'px');
   }
@@ -668,7 +674,7 @@ if (REPEATS > 0 && IMAGES.length){
       if (proj.more && proj.more.length){
         srcs = srcs.concat(proj.more);                    // projekta paša attēli
       }                                                   // darbs ar vienu attēlu rāda tikai to
-      slides = srcs.map(function(src){ return '<section class="slide">' + mediaTag(src, altText(item.querySelector('.cap').textContent)) + '</section>'; });
+      slides = srcs.map(function(src){ return '<section class="slide">' + mediaTag(src, altText(item.dataset.cap)) + '</section>'; });
     } else {
       for (var j = 0; j < VIEW_COUNT; j++){
         var ph = PH[(idx + j) % PH.length], ar = ph.ar.split('/');
@@ -678,8 +684,8 @@ if (REPEATS > 0 && IMAGES.length){
       }
     }
 
-    vtitle.textContent = item.querySelector('.cap').textContent;     // nosaukums un apraksts nemainās
-    vdesc.textContent = (proj && proj.desc) || DESC;
+    vtitle.innerHTML = item.querySelector('.cap').innerHTML;         // nosaukums (LV/EN) un apraksts
+    vdesc.innerHTML = proj && proj.desc ? bi(proj.desc, proj.descEn) : esc(DESC);
     vslides.innerHTML = slides.join('');
     viewN = slides.length;
     fitHead();
