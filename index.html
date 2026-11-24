@@ -10,16 +10,17 @@
 <meta property="og:title" content="Elza Bērziņa — Multimediju māksla">
 <meta property="og:description" content="Elza Bērziņa ir multimediju māksliniece no Latvijas. Portfolio: darbi, projekti un kontaktinformācija.">
 <meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;500;700&family=Inter+Tight:wght@300;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@400;500;700&family=Inter+Tight:wght@300;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#ffffff; --fg:#111111;
     --dot:#000000;                     /* kursora krāsa */
     --cg:"Cormorant Infant", Georgia, serif;
     --sans:"Inter Tight", "Helvetica Neue", Arial, sans-serif;
-    --display:"DM Serif Display", Georgia, serif;
     --gap:18px;
   }
   *{box-sizing:border-box;}
@@ -27,6 +28,15 @@
   body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--cg); -webkit-font-smoothing:antialiased;}
   a{color:inherit; text-decoration:none;}
   button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer;}
+  /* Kājene: © 2026 — gaiši pelēka */
+  .foot{font-family:var(--sans); font-weight:300; font-size:12px; letter-spacing:.02em; color:#b8b8b8;}
+  .foot-fixed{position:fixed; left:0; right:0; bottom:12px; z-index:45; text-align:center; pointer-events:none;}
+  body:has(.viewer.open) .foot-fixed{display:none;}   /* projekta skatā kājene nerādās */
+  /* Teksta iezīmēšana un attēlu lejuplāde bloķēta (kontakti — iezīmējami) */
+  body{-webkit-user-select:none; user-select:none; -webkit-touch-callout:none;}
+  .info-links a{-webkit-user-select:text; user-select:text;}
+  img, video{-webkit-user-drag:none; user-select:none; -webkit-touch-callout:none;}
+  .item img, .item video, .slide img, .slide video, .info-pic img{pointer-events:none;}
   .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 
   /* ---------- Valodas ---------- */
@@ -212,7 +222,7 @@
     display:flex; flex-direction:column; justify-content:flex-start;   /* IG un e-pasts — uzreiz zem apraksta */
     text-align:center; font-family:var(--cg); color:var(--fg);
   }
-  .info-bio p{font-size:24px; line-height:1.3; margin:0 0 28px;}
+  .info-bio h1{font-size:24px; font-weight:400; line-height:1.3; margin:0 0 28px;}
   .info-links{
     display:flex; justify-content:center; flex-wrap:wrap; gap:10px 34px; padding-top:20px;
     font-size:18px; line-height:1.3;
@@ -233,7 +243,7 @@
   @media (max-width:760px){
     .info-pic{top:62px; width:110px;}
     .info-inner{width:84vw; padding-top:250px;}
-    .info-bio p{font-size:19px;}
+    .info-bio h1{font-size:19px;}
   }
 
   /* Pēc pēdējā attēla — nākamais projekts, tāds pats kā sākuma lapā (viena šūna) */
@@ -271,7 +281,6 @@
 </head>
 <body>
 
-<h1 class="sr">Elza Bērziņa — Multimediju māksliniece</h1>
 <!-- ✏️ REDIĢĒT: ELZA un BĒRZIŅA kā SVG — ieliec failus images/elza.svg un images/berzina.svg
      (kamēr failu nav, rāda parastu tekstu). Izmēru maina .name img{height:54px} -->
 <a class="ui name name-l" href="#" aria-label="Elza Bērziņa — Par"><img src="images/elza.svg" alt="Elza" onerror="this.replaceWith(document.createTextNode('Elza'))"></a>
@@ -287,6 +296,7 @@
   <button data-lang="en" data-t="EN">EN</button>
 </div>
 
+<footer class="foot foot-fixed">© 2026 Elza Bērziņa portfolio</footer>
 <div class="dot" id="dot"></div>
 
 <main class="stream" id="stream">
@@ -304,12 +314,11 @@
   <div class="info-pic"><img src="images/portrets.jpg" alt="Elza Bērziņa — portrets" width="1536" height="2048" loading="lazy" decoding="async"></div>
 
   <div class="info-inner">
-    <h2 class="sr"><span lang="lv">Par</span><span lang="en">About</span></h2>
     <div class="info-bio">
-      <p>
+      <h1>
         <span lang="lv">Elza Bērziņa ir vizuālā māksliniece, kura strādā ar digitālām un telpiskām vizuālās komunikācijas formām. Viņas darbus iedvesmo apkārtējās vides novērojumi un brīži, kuros laiks, vide vai nejaušība mainījusi ierasto lietu nozīmi. Pievēršot uzmanību detaļām, kas ikdienā nereti paliek nepamanītas, viņa meklē vizuālus stāstus situācijās, kurās ierastas lietas atklājas citādi. Pašlaik viņa studē Latvijas Mākslas akadēmijas maģistrantūras programmā "Vizuālā komunikācija".</span>
         <span lang="en">Elza Bērziņa is a visual artist who works with digital and spatial forms of visual communication. Her work is inspired by observations of the surrounding environment and moments when time, the environment, or chance has changed the meaning of familiar things. By paying attention to details that often go unnoticed in everyday life, she seeks visual narratives in situations where ordinary things reveal themselves in unexpected ways. She is currently studying in the Master's programme in Visual Communication at the Art Academy of Latvia.</span>
-      </p>
+      </h1>
     </div>
 
     <!-- Apakšā: Instagram un e-pasts (e-pasts neatver pastu — uz klikšķi tikai nokopējas) -->
@@ -364,7 +373,7 @@ var MAIL_DOMAIN = ['icloud', 'com'];   // = icloud.com
    ===================================================================== */
 function isVideo(src){ return /\.(mp4|webm|mov)(\?|$)/i.test(src); }
 function mediaTag(src, alt, cls, loadAttr){
-  if (isVideo(src)) return '<video' + (cls ? ' class="' + cls + '"' : '') + ' src="' + src + '" aria-label="' + alt + '" muted loop playsinline autoplay preload="metadata"></video>';
+  if (isVideo(src)) return '<video' + (cls ? ' class="' + cls + '"' : '') + ' src="' + src + '" aria-label="' + alt + '" muted loop playsinline autoplay preload="metadata" controlslist="nodownload" disablepictureinpicture></video>';
   return '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + src + '" alt="' + alt + '"' + (loadAttr || '') + '>';
 }
 function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
@@ -602,6 +611,9 @@ if (REPEATS > 0 && IMAGES.length){
   }, {passive:true});
 
   /* ----- Kursors: khaki aplītis, palielinās virs klikšķināmā ----- */
+  /* nevar saglabāt/vilkt attēlus un video */
+  document.addEventListener('contextmenu', function(e){ if (e.target.closest && e.target.closest('.item, .slide, .info-pic, .viewer img, .viewer video')) e.preventDefault(); });
+  document.addEventListener('dragstart', function(e){ if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') e.preventDefault(); });
   var dot = document.getElementById('dot');
   if (window.matchMedia('(hover:hover) and (pointer:fine)').matches){
     window.addEventListener('mousemove', function(e){
