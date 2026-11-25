@@ -9,7 +9,26 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Elza Bērziņa — Multimediju māksla / Multimedia Art">
 <meta property="og:description" content="Elza Bērziņa ir multimediju māksliniece no Latvijas / Elza Bērziņa is a multimedia artist from Latvia.">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://erzabelzina.github.io/">
+<meta property="og:image" content="https://erzabelzina.github.io/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Elza Bērziņa — portrets">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://erzabelzina.github.io/images/og-image.jpg">
+<link rel="canonical" href="https://erzabelzina.github.io/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Elza Bērziņa",
+  "url": "https://erzabelzina.github.io/",
+  "image": "https://erzabelzina.github.io/images/portrets.jpg",
+  "jobTitle": "Graphic designer and visual artist",
+  "description": "Elza Bērziņa is a graphic designer and visual artist from Latvia working with digital and spatial forms of visual communication.",
+  "sameAs": ["https://www.instagram.com/erzabelzina"]
+}
+</script>
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -297,7 +316,13 @@
   <button data-lang="en" data-t="EN">EN</button>
 </div>
 
-<footer class="foot foot-fixed">© 2026 </footer>
+<noscript>
+  <h1>Elza Bērziņa — Multimediju māksliniece / Multimedia artist</h1>
+  <p>Elza Bērziņa ir grafikas dizainere un vizuālā māksliniece no Latvijas. / Elza Bērziņa is a graphic designer and visual artist from Latvia.</p>
+  <p>Šai lapai nepieciešams JavaScript, lai parādītu portfolio. / This portfolio requires JavaScript.</p>
+  <p><a href="https://www.instagram.com/erzabelzina">Instagram: erzabelzina</a></p>
+</noscript>
+<footer class="foot foot-fixed">© 2026 Elza Bērziņa portfolio</footer>
 <div class="dot" id="dot"></div>
 
 <main class="stream" id="stream">
@@ -450,12 +475,15 @@ var QUOTES = [
 /* ✏️ REDIĢĒT 3) Režģa garums: cik rindu vienā ciklā (katrā 5 kolonnas). Vairāk rindu = vairāk dažādu darbu pirms atkārtošanās. */
 /* ✏️ REDIĢĒT 3a) Cik reižu katrs darbs atkārtojas vienā režģa ciklā (1 = tikai reizi, 2 = divreiz …).
    Režģa garums (ROWS) tiek aprēķināts automātiski. Ja gribi pats noteikt rindu skaitu, ieraksti REPEATS = 0 un maini ROWS. */
+/* ✏️ REDIĢĒT 3b) Tukšie lauki režģī: rindu numuri (skaita no 0), kurās vienā kolonnā tiek atstāts tukšs lauks.
+   [] = nav tukšu lauku (visi režģa lauki aizpildīti). Piemērs ar tukšumiem: [2, 4, 8] */
+var EMPTY_ROWS = [];
 var REPEATS = 2;
 var ROWS = 10;      // cik rindas vienā ciklā (5 kolonnas katrā) — izmanto tikai ja REPEATS = 0
 if (REPEATS > 0 && IMAGES.length){
   var need = IMAGES.length * REPEATS;
   for (ROWS = 2; ROWS < 60; ROWS++){
-    var cells = ROWS * 5 - Math.floor(ROWS / 2) - [2, 4, 8].filter(function(r){ return r < ROWS; }).length;
+    var cells = ROWS * 5 - Math.floor(ROWS / 2) - EMPTY_ROWS.filter(function(r){ return r < ROWS; }).length;
     if (cells >= need) break;
   }
 }
@@ -519,7 +547,7 @@ if (REPEATS > 0 && IMAGES.length){
   });
   // pa retam (3 rindās no 10) viena tukša šūna — pārējās rindas ir pilnas
   var emptyAt = {};
-  [2, 4, 8].filter(function(r){ return r < ROWS; }).forEach(function(r){
+  EMPTY_ROWS.filter(function(r){ return r < ROWS; }).forEach(function(r){
     emptyAt[r] = Math.floor(lrand() * COLS);
   });
 
