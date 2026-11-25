@@ -260,6 +260,7 @@
   @keyframes draw{to{stroke-dashoffset:0;}}
   .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
   @media (max-width:760px){
+    body:has(.viewer.open) .name{opacity:0; visibility:hidden; pointer-events:none;}   /* telefonā atvērtā projektā vārds sānos nerādās */
     .info-pic{top:62px; width:110px;}
     .info-inner{width:84vw; padding-top:250px;}
     .info-bio h1{font-size:19px;}
